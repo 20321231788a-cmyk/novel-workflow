@@ -1,0 +1,277 @@
+{
+  "schema_version": 1,
+  "library_version": "expression-v2-20261012",
+  "kind": "syntax",
+  "status": "active_diagnostic_rules_not_approved_style_vocabulary",
+  "rules": [
+    {
+      "id": "S01",
+      "name": "同一结果多层认证",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "cooccurrence",
+          "terms": [
+            "轰",
+            "飞",
+            "碎",
+            "死寂",
+            "惊恐",
+            "一拳",
+            "一招"
+          ],
+          "min_distinct": 4,
+          "window": "prose_window",
+          "window_size": 5
+        }
+      ],
+      "diagnosis": "声音、比喻、碎物、飞人和围观可能反复确认同一次打击。连续声响、威力比喻与配角失控即便词面不同，也须核对是否仍只在宣布同一结果。",
+      "revision": "标清每层新增信息，结果清楚后转向新的应答、位置、损伤或选择。",
+      "retain_when": [
+        "不同结果分别影响下一步行动",
+        "多个角色反应各有利益和知情差异"
+      ],
+      "evidence_ids": [
+        "E-S01",
+        "T3-02"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S02",
+      "name": "结果后独段复述计数",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "^\\s*(?:一拳|一招|一剑|一掌)[！!。…]*\\s*$",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "一拳或一招独段后又完整复述刚才结果，可能形成重复结算。",
+      "revision": "核对总结有没有新增机制或结果，没有则局部收拢。",
+      "retain_when": [
+        "出手前解释正在采用的机制",
+        "总结提供此前尚未揭示的信息"
+      ],
+      "evidence_ids": [
+        "E-S02"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S03",
+      "name": "对白前固定全套姿态",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "cooccurrence",
+          "terms": [
+            "嘴角",
+            "眼",
+            "声音",
+            "冷笑",
+            "缓缓"
+          ],
+          "min_distinct": 4,
+          "window": "prose_window",
+          "window_size": 4
+        }
+      ],
+      "diagnosis": "连续对白被相同神态、动作和声音定性包裹，接话可能停滞。",
+      "revision": "按认人、隐瞒、打断、操作和反差的实际用途取舍标签。",
+      "retain_when": [
+        "动作改变谈话条件",
+        "说话者容易混淆或态度反差必须可见"
+      ],
+      "evidence_ids": [
+        "E-S03"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S04",
+      "name": "比较或否定只用于反复评级",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "不是[^。！？\\n]{1,45}(?:而是|，是)|莫说[^。！？\\n]{1,45}(?:便是|就是)|连[^。！？\\n]{1,25}都",
+          "window": "prose_window",
+          "window_size": 4,
+          "min_matches": 2
+        }
+      ],
+      "diagnosis": "比较句和否定转折可能重复强弱评价，而未解释可用条件。",
+      "revision": "保留能帮助理解判断、差别与选择的比较，不按结构一律删除。",
+      "retain_when": [
+        "真正纠正误解或排除错误身份",
+        "比较给出胜负依据或人物自己的尺度"
+      ],
+      "evidence_ids": [
+        "E-S04"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S05",
+      "name": "拟声与声音释义重复",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "^\\s*[“”「」]?(?:轰|咚|砰|啪|噗|嗡|咔嚓|当啷|哗啦|嘭){1,6}[—！!。…]*[“”「」]?\\s*$",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "独段声响后立即再次宣布巨响，可能把一个瞬间拆为多次预告。",
+      "revision": "每个声响回指具体动作；独立动作与必要停顿保留，同义释义收拢。",
+      "retain_when": [
+        "每声对应不同打击",
+        "停顿承担认知转折或真正打断"
+      ],
+      "evidence_ids": [
+        "E-S05"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S06",
+      "name": "被动摧毁理智代替转念",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:理智|谨慎|信念|意志|防线|心防)[^。！？\\n]{0,45}(?:撕碎|粉碎|轰碎|摧毁|崩塌|瓦解)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "抽象心理被撕碎、轰碎、粉碎等外力反复处理，可能遮住触发和选择。",
+      "revision": "留下实际触发、人物主观理解及行动变化，再判断比喻是否仍有必要。",
+      "retain_when": [
+        "比喻准确表达主观失控",
+        "已清楚交代新消息与选择"
+      ],
+      "evidence_ids": [
+        "E-S06",
+        "T3-03"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S07",
+      "name": "读心或群体反应替代个体",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:所有人|每个人|全场|众人|全军)[^。！？\\n]{0,30}(?:死寂|失色|震撼|惊恐|窒息|颤抖|瞪|明白|知道)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "所有人、全场等反应可能无区别地替场面盖章。",
+      "revision": "区分现场不同目的与信息位置，群体概述只承担实际需要的范围。",
+      "retain_when": [
+        "现场共享同一刺激且概述足够准确",
+        "叙述者有权使用该观察距离"
+      ],
+      "evidence_ids": [
+        "E-S07",
+        "T3-02",
+        "T3-03"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S08",
+      "name": "连续长逗号串需核主体",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:[^，。！？\\n]{1,70}，){5}[^。！？\\n]{1,70}",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "多个完整动作、对象与评价挤在一段，可能产生指代或动作顺序歧义。",
+      "revision": "按主体和信息变化调整，保留连续推理、叮嘱和完整动作所需的长句。",
+      "retain_when": [
+        "单一主体连续动作清楚",
+        "完整说明或人物长句有阅读作用"
+      ],
+      "evidence_ids": [
+        "E-S08"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S09",
+      "name": "悬置标点格式反复重播",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "——|…{2,}|\\.{3,}|最后一刻|千钧一发",
+          "window": "prose_window",
+          "window_size": 4,
+          "min_matches": 3
+        }
+      ],
+      "diagnosis": "破折号、省略与最后一刻等格式可能先于事件需要，机械拖延信息。还须看普通观察是否无故套用生死关头的叙述强度；停顿数量不能代替语境。",
+      "revision": "确认停顿是否对应打断、犹疑或识别延迟；只处理无作用的重复悬置。",
+      "retain_when": [
+        "台词真实中断或人物迟疑",
+        "省略承载情绪与叙述节拍"
+      ],
+      "evidence_ids": [
+        "E-S09",
+        "T3-02"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "S10",
+      "name": "系统界面和强调层混用",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "【[^\\n】]*【",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "嵌套标签可能使记录、物品强调和叙述者认证混在一起。",
+      "revision": "先确认主体与信息归属，保留本书既定界面和记录格式。",
+      "retain_when": [
+        "本书界面允许嵌套显示",
+        "括号清楚区分模拟记录与现实叙述"
+      ],
+      "evidence_ids": [
+        "E-S10"
+      ],
+      "manual_review_required": true
+    }
+  ]
+}

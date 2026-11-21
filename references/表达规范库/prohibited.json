@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "library_version": "expression-v2-20261012",
+  "kind": "prohibited",
+  "status": "active_diagnostic_rules_not_approved_style_vocabulary",
+  "rules": [
+    {
+      "id": "B01",
+      "name": "禁止伪造已发生的证据",
+      "enforcement": "prohibit_after_verification",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:刚才|方才|此前|先前)[^。！？\\n]{0,35}(?:说过|说的|听过|提到|看见|见过)|(?:醉酒|酒后)[^。！？\\n]{0,45}(?:说|提|透|讲)|(?:说|提|透|讲)[^。！？\\n]{0,45}(?:醉酒|酒后)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "把前文不存在的台词、观察或知识说成已经出现，制造虚假推理依据。",
+      "revision": "回查真实前文、有效设定和作者批准背景，区分本次获准新增回忆与伪称前文已有的依据；无来源的精确信息不能替代推测和验证。只在获准范围修复。",
+      "retain_when": [
+        "前文确有该证据且由当前主体获得",
+        "清楚标记为猜测、想象或不可靠记忆"
+      ],
+      "evidence_ids": [
+        "E-B01",
+        "T3-06"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "B02",
+      "name": "禁止以修辞追加能力与规则",
+      "enforcement": "prohibit_after_verification",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "全部实装|彻底免疫|绝对免疫|尽数贯通|方圆[^。！？\\n]{0,10}(?:百丈|数里)|寿命[^。！？\\n]{0,20}(?:数十年|拔高)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "为了渲染而改变感知、寿命、装配、药效、物品来源或战力边界。",
+      "revision": "核对能力的对象、条件、范围、代价、当前装备和效果来源；学习能力不等于即时掌握，静态限制不等于行动中有效。核实后避免扩权，冲突另记，不自动改设。",
+      "retain_when": [
+        "已有有效来源明确支持",
+        "没有被叙述者认证的人物夸口"
+      ],
+      "evidence_ids": [
+        "E-B02",
+        "T3-04",
+        "T3-05",
+        "T3-07"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "B03",
+      "name": "禁止无新信息重复宣布同一结果",
+      "enforcement": "prohibit_after_verification",
+      "scope": "general",
+      "detectors": [],
+      "diagnosis": "已确认各层只重说同一强度、感受或结论后，仍以新形容词与旁白继续放大。",
+      "revision": "保留必要体验和实际后果，转向新的回应与条件。",
+      "retain_when": [
+        "各层确有不同信息或人物关系作用",
+        "刻意复沓承担节奏、人物偏执或情绪变化，不是单纯重复认证"
+      ],
+      "evidence_ids": [
+        "E-B03",
+        "T3-02"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "B04",
+      "name": "禁止把未验证的推测、局部情报冒充定论",
+      "enforcement": "prohibit_after_verification",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "毫无疑问|所有[^。！？\\n]{0,12}拼图|彻底[^。！？\\n]{0,12}(?:明白|校准|证实)|(?:全世界|整个世界)[^。！？\\n]{0,16}(?:只有|仅有)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "线索不足却认证凶手、时间、动机、全局数量或所有人内心；局部可见数量被升级为全局总数。",
+      "revision": "列明观察支持的范围、提出假设的人及新证据何时到达；来源仍未知就保留未知。合理推测或人物夸口可以保留，不由旁白认证。",
+      "retain_when": [
+        "已有确证",
+        "叙述视角明确允许且有实际依据"
+      ],
+      "evidence_ids": [
+        "E-B04",
+        "T3-06",
+        "T3-08"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "B05",
+      "name": "禁止无因重置已发生的状态",
+      "enforcement": "prohibit_after_verification",
+      "scope": "general",
+      "detectors": [],
+      "diagnosis": "返回场景后抹掉已有身份、待遇、关系或物品状态，以便重演受压情节。",
+      "revision": "接回进入前的实际状态，再承接本次真实变化。",
+      "retain_when": [
+        "已发生新的事件解释变化",
+        "作者已明确批准重置或改写",
+        "有清楚主体、时间与叙事层标记的回忆、模拟或梦境"
+      ],
+      "evidence_ids": [
+        "E-B05"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "B06",
+      "name": "禁止确认后的对象与搭配错配",
+      "enforcement": "prohibit_after_verification",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:面庞|脸庞|脸上)[^。！？\\n]{0,25}(?:一抹|一缕)[^。！？\\n]{0,12}大笑|精纯(?:的)?武者",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "量词、谓语或比喻承载对象经过语境核实仍不成立。",
+      "revision": "只修不成立的搭配，不批量换掉正常词语。",
+      "retain_when": [
+        "本书有意使用并能理解的特殊口吻",
+        "所指对象使该搭配成立"
+      ],
+      "evidence_ids": [
+        "E-B06"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "B07",
+      "name": "禁止参考原句和显著模板回流生成",
+      "enforcement": "prohibit_after_verification",
+      "scope": "general",
+      "detectors": [],
+      "diagnosis": "复制参考原句、独特意象或连续句式骨架，再替换名字与同义词。",
+      "revision": "只提炼抽象写法，原文证据留在离线审计资料中。",
+      "retain_when": [
+        "普通词语的自然重合不等于复制"
+      ],
+      "evidence_ids": [
+        "E-B07"
+      ],
+      "manual_review_required": true
+    }
+  ]
+}

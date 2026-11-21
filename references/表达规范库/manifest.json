@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "library_version": "expression-v2-20261012",
+  "files": [
+    "wording.json",
+    "syntax.json",
+    "prohibited.json"
+  ],
+  "default_scan_result": "review_only",
+  "rules_are_not_ai_authorship_evidence": true,
+  "automatic_rewrite": false,
+  "approved_style_lexicon_unchanged": true,
+  "evidence_policy": "证据按ID保存在当前项目离线对照记录；生成只读取抽象机制与保留条件，不读取参考原句。",
+  "explicit_literal_bans": [],
+  "evidence_catalog_id": "annual-entry-expression-audit-20261012",
+  "required_manual_policy_review": "全部B类均查事实与条件；detectors只覆盖部分线索，未命中不等于通过。",
+  "evidence_catalogs": [
+    "annual-entry-expression-audit-20261011",
+    "annual-entry-expression-audit-20261012"
+  ]
+}

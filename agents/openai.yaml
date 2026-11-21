@@ -1,0 +1,4 @@
+interface:
+  display_name: "长篇网文创作技能"
+  short_description: "支持文风锚点入库、留白锚点排纲、中度放权作家态起草与轻量品控（已停用朱雀）"
+  default_prompt: "使用 $novel-workflow 确认当前小说项目，按留白排纲、中度放权作家态起草（≥1700有效汉字）与轻量品控工序执行任务。"

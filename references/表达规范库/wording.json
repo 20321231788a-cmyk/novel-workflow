@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "library_version": "expression-v2-20261012",
+  "kind": "wording",
+  "status": "active_diagnostic_rules_not_approved_style_vocabulary",
+  "rules": [
+    {
+      "id": "W01",
+      "name": "判断性强化词成串",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "极致|至极|滔天|浩瀚|恐怖|狂暴|无比|绝对|彻底|惊天|前所未有|绝无错漏",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 3
+        }
+      ],
+      "diagnosis": "连续强调强、惨、彻底或绝对，可能只更换强度词；旧词减少也要检查新词是否重演同一功能。",
+      "revision": "先确定本场需要辨认的对象、变化和作用，保留有不同贡献的修饰。",
+      "retain_when": [
+        "不同修饰分别说明材质、位置、代价或人物偏见",
+        "高潮需要该强度且近处没有同义重播"
+      ],
+      "evidence_ids": [
+        "E-W01",
+        "T3-01"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W02",
+      "name": "动作程度副词堆叠",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "猛然|骤然|轰然|悍然|狠狠|死死|疯狂|急速|缓缓|猛地|瞬间",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 3
+        }
+      ],
+      "diagnosis": "副词可能代替动作之间的实际差别。",
+      "revision": "读清每个动词的主体和后果，保留改变速度、控制或情绪的信息。",
+      "retain_when": [
+        "不同副词准确区别连续动作",
+        "说话者刻意夸张或叙述有必要的速度差"
+      ],
+      "evidence_ids": [
+        "E-W02",
+        "T3-01"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W03",
+      "name": "冷意与杀意反复定性",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "冰冷|森寒|寒意|杀意|杀气|冷笑|寒芒",
+          "window": "prose_window",
+          "window_size": 4,
+          "min_matches": 3
+        }
+      ],
+      "diagnosis": "相邻段多次定性人物狠、冷，可能挤掉具体判断。",
+      "revision": "优先保留本次要说什么、为何这样说和随后怎样做。",
+      "retain_when": [
+        "温度的真实感知",
+        "人物必须隐藏态度且动作与台词形成反差",
+        "当下确有敌意、恫吓或报复目的且符合人物"
+      ],
+      "evidence_ids": [
+        "E-W03"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W04",
+      "name": "量词和抽象对象需核搭配",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:一抹|一缕|一股|一丝)[^。！？\\n]{0,14}(?:大笑|弧度|力量|威压|杀机|寒意)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "量词、动作或承载对象可能搭配不当，不能见一抹一股就判错。",
+      "revision": "核清描写的是表情、声音、形状还是行为，只修实际错配部分。",
+      "retain_when": [
+        "量词与对象搭配成立且有具体作用",
+        "属于人物有意使用的口头表达"
+      ],
+      "evidence_ids": [
+        "E-W04"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W05",
+      "name": "相邻万能比喻",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:仿佛|如同|宛如|犹如|好似)[^。！？\\n]{2,55}",
+          "window": "prose_window",
+          "window_size": 4,
+          "min_matches": 2
+        }
+      ],
+      "diagnosis": "比喻可能轮流重复同一个强度，使画面与情绪不断重新起步。",
+      "revision": "只收拢已经核实没有新信息的重播，保留有效心理和修辞，不强制改成动作。",
+      "retain_when": [
+        "比喻提供新的可理解尺度或人物感受",
+        "多意象各自对应不同变化"
+      ],
+      "evidence_ids": [
+        "E-W05"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W06",
+      "name": "声音套用威势评级",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:声音|语气|话音)[^。！？\\n]{0,40}(?:寒潭|九幽|金石|惊雷|寒风|不容置疑|毋庸置疑|不带一丝活人温度)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "声音常被寒潭、惊雷等统一认证为不可抗拒，可能替代真实接话。",
+      "revision": "判断声音描写是否帮助辨认、掩饰、打断或改变对方的反应。",
+      "retain_when": [
+        "比喻贴合听者感知",
+        "真正需要音量或声线区别说话情境"
+      ],
+      "evidence_ids": [
+        "E-W06"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W07",
+      "name": "嘴角眼眸公式化反应",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "(?:嘴角|唇角)[^。！？\\n]{0,28}(?:一抹|弧度|冷笑)|(?:瞳孔|眼眸|眼底)[^。！？\\n]{0,20}(?:一缩|收缩|针尖|极致|一闪)",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "固定神态可能在每次台词前重复摆出同一态度。",
+      "revision": "保留有身份识别、面子、误会或态度变化作用的反应。",
+      "retain_when": [
+        "神态透露台词未说的真实心思",
+        "反应本身影响对方下一步"
+      ],
+      "evidence_ids": [
+        "E-W07"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W08",
+      "name": "叙述替读者统一感受",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "令人|让人|使人",
+          "window": "prose_window",
+          "window_size": 4,
+          "min_matches": 2
+        }
+      ],
+      "diagnosis": "令人、让人等评价可能没有具体感知主体，也可能只重说物体很可怕。",
+      "revision": "区分人物当场评价与旁白评级，保留必要立场，不替所有人盖章。",
+      "retain_when": [
+        "明确角色正在说或判断",
+        "叙述者口吻有该习惯且带来新认识"
+      ],
+      "evidence_ids": [
+        "E-W08"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W09",
+      "name": "生命源头及绝对程度需事实依据",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "生命本源|彻底免疫|绝对免疫|全部实装|尽数贯通|完全清除|完美蜕变|算无遗策|绝无错漏|绝对隐匿|真正的隐身",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "用生命本源、绝对免疫、全然清除等词放大效果，可能已改变设定。",
+      "revision": "核对实际效果、来源与限制，不以换形容词掩盖内容变化。",
+      "retain_when": [
+        "已确认规则明确允许",
+        "属于未被叙述认证的人物猜测或夸口"
+      ],
+      "evidence_ids": [
+        "E-W09",
+        "T3-04",
+        "T3-07"
+      ],
+      "manual_review_required": true
+    },
+    {
+      "id": "W10",
+      "name": "以神话尺度修饰普通反应",
+      "enforcement": "review",
+      "scope": "general",
+      "detectors": [
+        {
+          "type": "regex",
+          "pattern": "九天[^。！？\\n]{0,10}(?:雷|寒泉)|远古[^。！？\\n]{0,10}(?:巨兽|伟力)|睥睨天下|沛莫能御|(?:如遭|宛如|仿佛)[^。！？\\n]{0,12}(?:雷击|雷轰|神罚)|神罚",
+          "window": "paragraph",
+          "window_size": 4,
+          "min_matches": 1
+        }
+      ],
+      "diagnosis": "天雷、远古巨兽等意象可能给普通转念和打击反复加同一强度。",
+      "revision": "判断尺度是否符合本书能力与当前体验，只在核实同义重播后局部取舍；词句校对不补新后果，不设次数配额。",
+      "retain_when": [
+        "世界观及实际能力支持该尺度",
+        "属于人物有根据的夸张感受"
+      ],
+      "evidence_ids": [
+        "E-W10",
+        "T3-02"
+      ],
+      "manual_review_required": true
+    }
+  ]
+}
